@@ -1,0 +1,47 @@
+        -:    0:Source:../samples/triangle.cpp
+        -:    0:Graph:triangle.gcno
+        -:    0:Data:triangle.gcda
+        -:    0:Runs:3
+        -:    0:Programs:1
+        -:    1:/*
+        -:    2:Homework #1 Part 2 Triangle
+        -:    3:Name: Shu-Hao Chang (Ken Chang)
+        -:    4:Student ID: 0456151
+        -:    5:Date: Oct 20, 2015
+        -:    6:
+        -:    7:Motivation:
+        -:    8:- Learn the first step to write testing code coding by using XUnit (googe testing framework)
+        -:    9:- Practice boundary value, equivalence class, , edge testing, and decision table based)
+        -:   10:- Practice TDD (test-driven development) by google test
+        -:   11:- Practice Xunit in a practical project
+        -:   12:Goal:
+        -:   13:- Implement the Triangle, NextDate, Commission problems by TDD
+        -:   14:- Using XUnit for writing testing code
+        -:   15:- In this time, we use google testing framework
+        -:   16:- Analyze boundary value, equivalence class, edge values, and decision table based
+        -:   17:- writing test code using these analyses
+        -:   18:*/
+        -:   19:
+        -:   20:#include <iostream>
+        -:   21:#include <cstring>
+        -:   22:#include <string>
+        -:   23:using namespace std;
+        -:   24:
+       37:   25:std::string triangleType(int a, int b, int c) {
+       37:   26:	if(a > 0 && b > 0 && c > 0 && a <= 200 && b <= 200 && c <= 200 ){
+       27:   27:		if ((a < b + c) && (b < a + c) && (c < b + a)) {
+       18:   28:			if ((a == b) && (b == c)){
+        6:   29:				return "Equilateral";
+       12:   30:			}else if ((a != b) && (b != c) && (a != c)){
+        6:   31:				return "Scalene";
+        -:   32:			}else{
+        6:   33:				return "Isoscelese";
+        -:   34:			}
+        -:   35:		}
+        -:   36:		else{
+        9:   37:			return "Not triangle";
+        -:   38:		}
+        -:   39:	}else{
+       10:   40:		return "Exceed length limitation";		
+        -:   41:	}
+        9:   42:}
