@@ -18,6 +18,9 @@ Goal:
 */
 #include "NextDate.h"
 #include <iostream>
+#include<cstdio>
+#include<cstdlib>
+#include<cstring>
 #include <string>
 using namespace std;
 
@@ -31,11 +34,11 @@ bool leapYear(int year) {
 string NextDate(int month, int day, int year){
 	int nDay, nMonth, nYear;
 	//testing for invalid inputs
-	if(day > 30 && day < 1){
+	if(day > 31 && day < 1){
 		return "invalid day";
-	}else if(month < 13 && month > 0){
+	}else if(month > 13 && month < 1){
 		return "invalid month";		
-	}else if(year < 2015 && year > 1811){
+	}else if(year > 2016 && year < 1811){
 		return "invalid year";
 	}
 	
