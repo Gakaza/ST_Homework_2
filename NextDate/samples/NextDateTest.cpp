@@ -12,6 +12,23 @@
 //Guide to setup gtest in ubuntu: http://stackoverflow.com/questions/18908923/unit-test-using-gtest-1-6-how-to-check-what-is-printed-out
 
 //C0 testing
+TEST(NextDateC0Test, C0Testing){
+	//testing the last day of each month
+	EXPECT_EQ("2/1/2014", NextDate(1, 31, 2014));
+	EXPECT_EQ("3/1/2014", NextDate(2, 28, 2014));
+	EXPECT_EQ("4/1/2014", NextDate(3, 31, 2014));
+	EXPECT_EQ("5/1/2014", NextDate(4, 30, 2014));
+	EXPECT_EQ("6/1/2014", NextDate(5, 31, 2014));
+	EXPECT_EQ("7/1/2014", NextDate(6, 30, 2014));
+	EXPECT_EQ("8/1/2014", NextDate(7, 31, 2014));
+	EXPECT_EQ("9/1/2014", NextDate(8, 31, 2014));
+	EXPECT_EQ("10/1/2014", NextDate(9, 30, 2014));
+	EXPECT_EQ("11/1/2014", NextDate(10, 31, 2014));
+	EXPECT_EQ("12/1/2014", NextDate(11, 30, 2014));
+	EXPECT_EQ("1/1/2015", NextDate(12, 31, 2014));
+}
+
+/*
 TEST(NextDateBoundaryTEST, UpperBoundaryTest) {
 	//int monthHandle(int day, int month, int year)
 	EXPECT_EQ(30, dayHandle(29, 10, 2015));
@@ -132,9 +149,9 @@ TEST(NextDateEQTEST, MonthLimitEqTest) {
 	EXPECT_EQ(7, monthHandle(30, 7, 2000));
 	EXPECT_EQ(2000, yearHandle(30, 7, 2000));
 }
-/*Edge Value: hybrid of Eq. class and boundary testing
- * */
+//Edge Value: hybrid of Eq. class and boundary testing
  
+/*
 TEST(NextDateEQTEST, NegAndZeroValueEDTest) {
 	EXPECT_EQ(-1, dayHandle(0, 0, 0));
 	EXPECT_EQ(-1, monthHandle(0, 0, 0));
@@ -257,9 +274,8 @@ TEST(NextDateEQTEST, MonthLimitEDTest) {
 	EXPECT_EQ(2000, yearHandle(30, 7, 2000));
 }
 
-/*Decision Table Based
- * based on slide 31 chap 07
-*/
+//Decision Table Based, based on slide 31 chap 07
+
 TEST(NextDateDecisionTEST, DecisionTest) {
 	//Change of month test
 	EXPECT_EQ(16, dayHandle(15, 4, 2001));
@@ -321,7 +337,7 @@ TEST(NextDateDecisionTEST, FailedCaseTest) {
 	EXPECT_EQ(-1, monthHandle(0, 0, 0));
 	EXPECT_EQ(-1, yearHandle(0, 0, 0));
 }
-
+*/
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

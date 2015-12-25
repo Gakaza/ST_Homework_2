@@ -30,7 +30,7 @@ bool leapYear(int year) {
 }
 string NextDate(int month, int day, int year){
 	int nDay, nMonth, nYear;
-	//testing for valid input
+	//testing for invalid inputs
 	if(day > 30 && day < 1){
 		return "invalid day";
 	}else if(month < 13 && month > 0){
@@ -38,6 +38,8 @@ string NextDate(int month, int day, int year){
 	}else if(year < 2015 && year > 1811){
 		return "invalid year";
 	}
+	
+	//nextDate inspection
 	if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10){
 		nYear = year;
 		if(day<31){
