@@ -1,5 +1,5 @@
 /*
-Homework #1 Part 1 NextDate
+Homework #2 Part 1 NextDate
 Name: Shu-Hao Chang (Ken Chang)
 Student ID: 0456151
 Date: Oct 20, 2015
@@ -34,11 +34,11 @@ bool leapYear(int year) {
 string NextDate(int month, int day, int year){
 	int nDay, nMonth, nYear;
 	//testing for invalid inputs
-	if(day > 31 && day < 1){
+	if(day > 31 || day < 1){
 		return "invalid day";
-	}else if(month > 13 && month < 1){
+	}else if(month > 13 || month < 1){
 		return "invalid month";		
-	}else if(year > 2016 && year < 1811){
+	}else if(year > 2016 || year < 1811){
 		return "invalid year";
 	}
 	
@@ -103,4 +103,3 @@ string NextDate(int month, int day, int year){
 	string nDate(str);
 	return nDate;
 }
-

@@ -1,4 +1,4 @@
-/*Test code for the NextDate.cpp
+/*Test code for the NextDate.cpp, Homework 2 Part 1
  * Name: Shu-Hao Chang (Ken Chang)
  * Student ID: 0456151
  * Date: Oct 29, 2015
@@ -14,330 +14,96 @@
 //C0 testing
 TEST(NextDateC0Test, C0Testing){
 	//testing the last day of each month
+	//min. requirement test cases
 	EXPECT_EQ("2/1/2014", NextDate(1, 31, 2014));
+	EXPECT_EQ("1/4/2014", NextDate(1, 3, 2014));
+	
 	EXPECT_EQ("3/1/2014", NextDate(2, 28, 2014));
-	EXPECT_EQ("4/1/2014", NextDate(3, 31, 2014));
+	EXPECT_EQ("2/4/2014", NextDate(2, 3, 2014));
+	
 	EXPECT_EQ("5/1/2014", NextDate(4, 30, 2014));
-	EXPECT_EQ("6/1/2014", NextDate(5, 31, 2014));
-	EXPECT_EQ("7/1/2014", NextDate(6, 30, 2014));
-	EXPECT_EQ("8/1/2014", NextDate(7, 31, 2014));
-	EXPECT_EQ("9/1/2014", NextDate(8, 31, 2014));
-	EXPECT_EQ("10/1/2014", NextDate(9, 30, 2014));
-	EXPECT_EQ("11/1/2014", NextDate(10, 31, 2014));
-	EXPECT_EQ("12/1/2014", NextDate(11, 30, 2014));
+	EXPECT_EQ("4/4/2014", NextDate(4, 3, 2014));
+	
 	EXPECT_EQ("1/1/2015", NextDate(12, 31, 2014));
+	EXPECT_EQ("12/4/2014", NextDate(12, 3, 2014));
 }
 
-/*
-TEST(NextDateBoundaryTEST, UpperBoundaryTest) {
-	//int monthHandle(int day, int month, int year)
-	EXPECT_EQ(30, dayHandle(29, 10, 2015));
-	EXPECT_EQ(10, monthHandle(29, 10, 2015));
-	EXPECT_EQ(2015, yearHandle(29, 10, 2015));
+//C1 Testing
+TEST(NextDateC1Test, C1Testing){
+	//testing the last day of each month
+	//all decision are traversed
+	EXPECT_EQ("2/1/2014", NextDate(1, 31, 2014));
+	EXPECT_EQ("1/4/2014", NextDate(1, 3, 2014));
 	
-	EXPECT_EQ(1, dayHandle(30, 4, 2015));
-	EXPECT_EQ(5, monthHandle(30, 4, 2015));
-	EXPECT_EQ(2015, yearHandle(30, 4, 2015));
+	EXPECT_EQ("3/1/2014", NextDate(2, 28, 2014));
+	EXPECT_EQ("2/4/2014", NextDate(2, 3, 2014));
+	EXPECT_EQ("2/29/2000", NextDate(2, 28, 2000));
+	EXPECT_EQ("3/1/2004", NextDate(2, 29, 2004));
 	
-	EXPECT_EQ(1, dayHandle(31, 12, 2015));
-	EXPECT_EQ(1, monthHandle(31, 12, 2015));
-	EXPECT_EQ(2016, yearHandle(31, 12, 2015));
+	EXPECT_EQ("5/1/2014", NextDate(4, 30, 2014));
+	EXPECT_EQ("4/4/2014", NextDate(4, 3, 2014));
 	
-	EXPECT_EQ(-1, dayHandle(29, 2, 2015));
-	EXPECT_EQ(-1, monthHandle(29, 2, 2015));
-	EXPECT_EQ(-1, yearHandle(29, 2, 2015));
-}
-
-TEST(NextDateBoundaryTEST, ZeroValueBoundaryTest) {
-	EXPECT_EQ(-1, dayHandle(0, 10, 2015));
-	EXPECT_EQ(-1, monthHandle(0, 10, 2015));
-	EXPECT_EQ(-1, yearHandle(0, 10, 2015));
+	EXPECT_EQ("1/1/2015", NextDate(12, 31, 2014));
+	EXPECT_EQ("12/4/2014", NextDate(12, 3, 2014));
 	
-	EXPECT_NE(1, dayHandle(-1, 4, 2015));
-	EXPECT_NE(5, monthHandle(-1, 4, 2015));
-	EXPECT_NE(2015, yearHandle(-1, 4, 2015));
+	//Invalid input deicision test cases
+	EXPECT_EQ("invalid day", NextDate(12, -1, 2014));
+	EXPECT_EQ("invalid month", NextDate(14, 3, 2014));
+	EXPECT_EQ("invalid year", NextDate(12, 3, 2018));
 	
-	EXPECT_EQ(1, dayHandle(31, 12, 0));
-	EXPECT_EQ(1, monthHandle(31, 12, 0));
-	EXPECT_EQ(1, yearHandle(31, 12, 0));
-	
-	EXPECT_EQ(-1, dayHandle(0, 0, 0));
-	EXPECT_EQ(-1, monthHandle(0, 0, 0));
-	EXPECT_EQ(-1, yearHandle(0, 0, 0));
-}
-
-
-
-//Equivalence Class Testing: test one case per class
-TEST(NextDateEQTEST, NegAndZeroValueEqTest) {
-	EXPECT_EQ(-1, dayHandle(0, 0, 0));
-	EXPECT_EQ(-1, monthHandle(0, 0, 0));
-	EXPECT_EQ(-1, yearHandle(0, 0, 0));
-	
-	EXPECT_EQ(-1, dayHandle(-1, 1, 1));
-	EXPECT_EQ(-1, monthHandle(-1, 1, 1));
-	EXPECT_EQ(-1, yearHandle(-1, 1, 1));
-	
-	EXPECT_EQ(-1, dayHandle(1, -1, 1));
-	EXPECT_EQ(-1, monthHandle(1, -1, 1));
-	EXPECT_EQ(-1, yearHandle(1, -1, 1));
-	
-	EXPECT_EQ(-1, dayHandle(1, 1, -1));
-	EXPECT_EQ(-1, monthHandle(1, 1, -1));
-	EXPECT_EQ(-1, yearHandle(1, 1, -1));
-	
-	EXPECT_EQ(-1, dayHandle(-1, -1, 1));
-	EXPECT_EQ(-1, monthHandle(-1, -1, 1));
-	EXPECT_EQ(-1, yearHandle(-1, -1, 1));
-	
-	EXPECT_EQ(-1, dayHandle(-1, 1, -1));
-	EXPECT_EQ(-1, monthHandle(-1, 1, -1));
-	EXPECT_EQ(-1, yearHandle(-1, 1, -1));
-	
-	EXPECT_EQ(-1, dayHandle(1, -1, -1));
-	EXPECT_EQ(-1, monthHandle(1, -1, -1));
-	EXPECT_EQ(-1, yearHandle(1, -1, -1));
-	
-	EXPECT_EQ(-1, dayHandle(-1, -1, -1));
-	EXPECT_EQ(-1, monthHandle(-1, -1, -1));
-	EXPECT_EQ(-1, yearHandle(-1, -1, -1));
-}
-
-TEST(NextDateEQTEST, MonthEqTest) {
-	//int monthHandle(int day, int month, int year)
-	//regular case
-	EXPECT_EQ(15, dayHandle(14, 6, 2000));
-	EXPECT_EQ(6, monthHandle(14, 6, 2000));
-	EXPECT_EQ(2000, yearHandle(14, 6, 2000));
-	
-	//change year
-	EXPECT_EQ(1, dayHandle(31, 12, 0));
-	EXPECT_EQ(1, monthHandle(31, 12, 0));
-	EXPECT_EQ(1, yearHandle(31, 12, 0));
-	
-	
-	//invalid input
-	EXPECT_EQ(-1, dayHandle(0, 2, 2000));
-	EXPECT_EQ(-1, monthHandle(0, 2, 2000));
-	EXPECT_EQ(-1, yearHandle(0, 2, 2000));
-	
-	EXPECT_EQ(-1, dayHandle(27, 13, 2000));
-	EXPECT_EQ(-1, monthHandle(27, 13, 2000));
-	EXPECT_EQ(-1, yearHandle(27, 13, 2000));
-	
-	EXPECT_EQ(-1, dayHandle(27, 12, -1));
-	EXPECT_EQ(-1, monthHandle(27, 12, -1));
-	EXPECT_EQ(-1, yearHandle(27, 12, -1));
-	
-	EXPECT_EQ(-1, dayHandle(35, 12, 0));
-	EXPECT_EQ(-1, monthHandle(35, 12, 0));
-	EXPECT_EQ(-1, yearHandle(35, 12, 0));
-}
-
-TEST(NextDateEQTEST, LeapYearEqTest) {
-	EXPECT_EQ(-1, dayHandle(0, 0, 0));
-	EXPECT_EQ(-1, monthHandle(0, 0, 0));
-	EXPECT_EQ(-1, yearHandle(0, 0, 0));
-}
-
-TEST(NextDateEQTEST, MonthLimitEqTest) {
-	EXPECT_EQ(30, dayHandle(29, 7, 2000));
-	EXPECT_EQ(7, monthHandle(29, 7, 2000));
-	EXPECT_EQ(2000, yearHandle(29, 7, 2000));
-	
-	EXPECT_EQ(31, dayHandle(30, 7, 2000));
-	EXPECT_EQ(7, monthHandle(30, 7, 2000));
-	EXPECT_EQ(2000, yearHandle(30, 7, 2000));
-}
-//Edge Value: hybrid of Eq. class and boundary testing
- 
-/*
-TEST(NextDateEQTEST, NegAndZeroValueEDTest) {
-	EXPECT_EQ(-1, dayHandle(0, 0, 0));
-	EXPECT_EQ(-1, monthHandle(0, 0, 0));
-	EXPECT_EQ(-1, yearHandle(0, 0, 0));
-	
-	EXPECT_EQ(-1, dayHandle(-1, 1, 1));
-	EXPECT_EQ(-1, monthHandle(-1, 1, 1));
-	EXPECT_EQ(-1, yearHandle(-1, 1, 1));
-	
-	EXPECT_EQ(-1, dayHandle(1, -1, 1));
-	EXPECT_EQ(-1, monthHandle(1, -1, 1));
-	EXPECT_EQ(-1, yearHandle(1, -1, 1));
-	
-	EXPECT_EQ(-1, dayHandle(1, 1, -1));
-	EXPECT_EQ(-1, monthHandle(1, 1, -1));
-	EXPECT_EQ(-1, yearHandle(1, 1, -1));
-	
-	EXPECT_EQ(-1, dayHandle(-1, -1, 1));
-	EXPECT_EQ(-1, monthHandle(-1, -1, 1));
-	EXPECT_EQ(-1, yearHandle(-1, -1, 1));
-	
-	EXPECT_EQ(-1, dayHandle(-1, 1, -1));
-	EXPECT_EQ(-1, monthHandle(-1, 1, -1));
-	EXPECT_EQ(-1, yearHandle(-1, 1, -1));
-	
-	EXPECT_EQ(-1, dayHandle(1, -1, -1));
-	EXPECT_EQ(-1, monthHandle(1, -1, -1));
-	EXPECT_EQ(-1, yearHandle(1, -1, -1));
-	
-	EXPECT_EQ(-1, dayHandle(-1, -1, -1));
-	EXPECT_EQ(-1, monthHandle(-1, -1, -1));
-	EXPECT_EQ(-1, yearHandle(-1, -1, -1));
-	
-	EXPECT_EQ(-1, dayHandle(-1, -2, -1));
-	EXPECT_EQ(-1, monthHandle(-1, -2, -1));
-	EXPECT_EQ(-1, yearHandle(-1, -2, -1));
-	
-	EXPECT_EQ(-1, dayHandle(-1, -2, -50));
-	EXPECT_EQ(-1, monthHandle(-1, -2, -50));
-	EXPECT_EQ(-1, yearHandle(-1, -2, -50));
-	
-	EXPECT_EQ(-1, dayHandle(0, 10, 2015));
-	EXPECT_EQ(-1, monthHandle(0, 10, 2015));
-	EXPECT_EQ(-1, yearHandle(0, 10, 2015));
-	
-	EXPECT_NE(1, dayHandle(-1, 4, 2015));
-	EXPECT_NE(5, monthHandle(-1, 4, 2015));
-	EXPECT_NE(2015, yearHandle(-1, 4, 2015));
-	
-	EXPECT_EQ(1, dayHandle(31, 12, 0));
-	EXPECT_EQ(1, monthHandle(31, 12, 0));
-	EXPECT_EQ(1, yearHandle(31, 12, 0));
-	
-	EXPECT_EQ(-1, dayHandle(0, 0, 0));
-	EXPECT_EQ(-1, monthHandle(0, 0, 0));
-	EXPECT_EQ(-1, yearHandle(0, 0, 0));
-}
-
-TEST(NextDateEQTEST, MonthEDTest) {
-	//int monthHandle(int day, int month, int year)
-	//regular case
-	EXPECT_EQ(15, dayHandle(14, 6, 2000));
-	EXPECT_EQ(6, monthHandle(14, 6, 2000));
-	EXPECT_EQ(2000, yearHandle(14, 6, 2000));
-	
-	//change year
-	EXPECT_EQ(1, dayHandle(31, 12, 0));
-	EXPECT_EQ(1, monthHandle(31, 12, 0));
-	EXPECT_EQ(1, yearHandle(31, 12, 0));
-	
-	
-	//invalid input
-	EXPECT_EQ(-1, dayHandle(0, 2, 2000));
-	EXPECT_EQ(-1, monthHandle(0, 2, 2000));
-	EXPECT_EQ(-1, yearHandle(0, 2, 2000));
-	
-	EXPECT_EQ(-1, dayHandle(27, 13, 2000));
-	EXPECT_EQ(-1, monthHandle(27, 13, 2000));
-	EXPECT_EQ(-1, yearHandle(27, 13, 2000));
-	
-	EXPECT_EQ(-1, dayHandle(27, 12, -1));
-	EXPECT_EQ(-1, monthHandle(27, 12, -1));
-	EXPECT_EQ(-1, yearHandle(27, 12, -1));
-	
-	EXPECT_EQ(-1, dayHandle(35, 12, 0));
-	EXPECT_EQ(-1, monthHandle(35, 12, 0));
-	EXPECT_EQ(-1, yearHandle(35, 12, 0));
-}
-
-TEST(NextDateEQTEST, LeapYearEDTest) {
-	EXPECT_EQ(-1, dayHandle(0, 0, 0));
-	EXPECT_EQ(-1, monthHandle(0, 0, 0));
-	EXPECT_EQ(-1, yearHandle(0, 0, 0));
-}
-
-TEST(NextDateEQTEST, MonthLimitEDTest) {
-	//Change of month test
-	EXPECT_EQ(30, dayHandle(29, 10, 2015));
-	EXPECT_EQ(10, monthHandle(29, 10, 2015));
-	EXPECT_EQ(2015, yearHandle(29, 10, 2015));
-	
-	EXPECT_EQ(1, dayHandle(30, 4, 2015));
-	EXPECT_EQ(5, monthHandle(30, 4, 2015));
-	EXPECT_EQ(2015, yearHandle(30, 4, 2015));
-	
-	EXPECT_EQ(1, dayHandle(31, 12, 2015));
-	EXPECT_EQ(1, monthHandle(31, 12, 2015));
-	EXPECT_EQ(2016, yearHandle(31, 12, 2015));
-	
-	EXPECT_EQ(-1, dayHandle(29, 2, 2015));
-	EXPECT_EQ(-1, monthHandle(29, 2, 2015));
-	EXPECT_EQ(-1, yearHandle(29, 2, 2015));
-	
-	EXPECT_EQ(30, dayHandle(29, 7, 2000));
-	EXPECT_EQ(7, monthHandle(29, 7, 2000));
-	EXPECT_EQ(2000, yearHandle(29, 7, 2000));
-	
-	EXPECT_EQ(31, dayHandle(30, 7, 2000));
-	EXPECT_EQ(7, monthHandle(30, 7, 2000));
-	EXPECT_EQ(2000, yearHandle(30, 7, 2000));
-}
-
-//Decision Table Based, based on slide 31 chap 07
-
-TEST(NextDateDecisionTEST, DecisionTest) {
-	//Change of month test
-	EXPECT_EQ(16, dayHandle(15, 4, 2001));
-	EXPECT_EQ(4, monthHandle(15, 4, 2001));
-	EXPECT_EQ(2001, yearHandle(15, 4, 2001));
-	
-	EXPECT_EQ(1, dayHandle(30, 4, 2015));
-	EXPECT_EQ(5, monthHandle(30, 4, 2015));
-	EXPECT_EQ(2015, yearHandle(30, 4, 2015));
-	
-	EXPECT_EQ(16, dayHandle(15, 1, 2001));
-	EXPECT_EQ(1, monthHandle(15, 1, 2001));
-	EXPECT_EQ(2001, yearHandle(15, 1, 2001));
-	
-	EXPECT_EQ(1, dayHandle(31, 1, 2001));
-	EXPECT_EQ(2, monthHandle(31, 1, 2001));
-	EXPECT_EQ(2001, yearHandle(31, 1, 2001));
-	
-	EXPECT_EQ(16, dayHandle(15, 12, 2001));
-	EXPECT_EQ(12, monthHandle(15, 12, 2001));
-	EXPECT_EQ(2001, yearHandle(15, 12, 2001));
-	
-	EXPECT_EQ(1, dayHandle(31, 12, 2015));
-	EXPECT_EQ(1, monthHandle(31, 12, 2015));
-	EXPECT_EQ(2016, yearHandle(31, 12, 2015));
-	
-	EXPECT_EQ(16, dayHandle(15, 2, 2001));
-	EXPECT_EQ(2, monthHandle(15, 2, 2001));
-	EXPECT_EQ(2001, yearHandle(15, 2, 2001));
-	
-	EXPECT_EQ(29, dayHandle(28, 2, 2004));
-	EXPECT_EQ(2, monthHandle(28, 2, 2004));
-	EXPECT_EQ(2004, yearHandle(28, 2, 2004));
-	
-	EXPECT_EQ(1, dayHandle(28, 2, 2001));
-	EXPECT_EQ(3, monthHandle(28, 2, 2001));
-	EXPECT_EQ(2001, yearHandle(28, 2, 2001));
-	
-	EXPECT_EQ(1, dayHandle(28, 2, 2015));
-	EXPECT_EQ(3, monthHandle(28, 2, 2015));
-	EXPECT_EQ(2015, yearHandle(28, 2, 2015));
-	
-	EXPECT_EQ(1, dayHandle(29, 2, 2004));
-	EXPECT_EQ(3, monthHandle(29, 2, 2004));
-	EXPECT_EQ(2004, yearHandle(29, 2, 2004));
-
-	EXPECT_EQ(-1, dayHandle(30, 2, 2001));
-	EXPECT_EQ(-1, monthHandle(30, 2, 2001));
-	EXPECT_EQ(-1, yearHandle(30, 2, 2001));
-
-	EXPECT_EQ(-1, dayHandle(29, 2, 2015));
-	EXPECT_EQ(-1, monthHandle(29, 2, 2015));
-	EXPECT_EQ(-1, yearHandle(29, 2, 2015));
 	
 }
 
-TEST(NextDateDecisionTEST, FailedCaseTest) {
-	EXPECT_EQ(-1, dayHandle(0, 0, 0));
-	EXPECT_EQ(-1, monthHandle(0, 0, 0));
-	EXPECT_EQ(-1, yearHandle(0, 0, 0));
+//MCDC Testing
+TEST(NextDateMCDCTest, MCDCTesting){
+	//testing the last day of each month
+	//all decision are traversed
+	EXPECT_EQ("2/1/2014", NextDate(1, 31, 2014));
+	EXPECT_EQ("1/4/2014", NextDate(1, 3, 2014));
+	
+	EXPECT_EQ("3/1/2014", NextDate(2, 28, 2014));
+	EXPECT_EQ("2/4/2014", NextDate(2, 3, 2014));
+	EXPECT_EQ("2/29/2000", NextDate(2, 28, 2000));
+	EXPECT_EQ("3/1/2004", NextDate(2, 29, 2004));
+	
+	EXPECT_EQ("4/1/2014", NextDate(3, 31, 2014));
+	EXPECT_EQ("3/4/2014", NextDate(3, 3, 2014));
+	
+	EXPECT_EQ("5/1/2014", NextDate(4, 30, 2014));
+	EXPECT_EQ("4/4/2014", NextDate(4, 3, 2014));
+	
+	EXPECT_EQ("6/1/2014", NextDate(5, 31, 2014));
+	EXPECT_EQ("5/4/2014", NextDate(5, 3, 2014));
+	
+	EXPECT_EQ("7/1/2014", NextDate(6, 30, 2014));
+	EXPECT_EQ("6/4/2014", NextDate(6, 3, 2014));
+	
+	EXPECT_EQ("8/1/2014", NextDate(7, 31, 2014));
+	EXPECT_EQ("7/4/2014", NextDate(7, 3, 2014));
+	
+	EXPECT_EQ("9/1/2014", NextDate(8, 31, 2014));
+	EXPECT_EQ("8/4/2014", NextDate(8, 3, 2014));
+	
+	EXPECT_EQ("10/1/2014", NextDate(9, 30, 2014));
+	EXPECT_EQ("9/4/2014", NextDate(9, 3, 2014));
+	
+	EXPECT_EQ("11/1/2014", NextDate(10, 31, 2014));
+	EXPECT_EQ("10/4/2014", NextDate(10, 3, 2014));
+	
+	EXPECT_EQ("12/1/2014", NextDate(11, 30, 2014));
+	EXPECT_EQ("11/4/2014", NextDate(11, 3, 2014));
+	
+	EXPECT_EQ("1/1/2015", NextDate(12, 31, 2014));
+	EXPECT_EQ("12/4/2014", NextDate(12, 3, 2014));
+	
+	//Invalid input, deicision test cases
+	EXPECT_EQ("invalid day", NextDate(12, -1, 2014));
+	EXPECT_EQ("invalid month", NextDate(14, 3, 2014));
+	EXPECT_EQ("invalid year", NextDate(12, 3, 2018));	
+	
+	//More Invalid input test cases
+	
 }
-*/
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
